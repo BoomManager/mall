@@ -1,5 +1,6 @@
 package com.macro.mall.service;
 
+import com.github.pagehelper.Page;
 import com.macro.mall.dto.PmsProductParam;
 import com.macro.mall.dto.PmsProductQueryParam;
 import com.macro.mall.dto.PmsProductResult;
@@ -79,4 +80,5 @@ public interface PmsProductService {
      * @return
      */
     PmsProductVertifyRecord getVertifyInfo(Long id);
+
 }

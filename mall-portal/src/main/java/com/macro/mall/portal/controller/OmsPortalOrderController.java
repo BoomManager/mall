@@ -1,6 +1,7 @@
 package com.macro.mall.portal.controller;
 
 import com.macro.mall.common.api.CommonResult;
+import com.macro.mall.model.OmsOrder;
 import com.macro.mall.portal.domain.ConfirmOrderResult;
 import com.macro.mall.portal.domain.OrderParam;
 import com.macro.mall.portal.service.OmsPortalOrderService;
@@ -55,5 +56,12 @@ public class OmsPortalOrderController {
     public CommonResult cancelOrder(Long orderId){
         portalOrderService.sendDelayMessageCancelOrder(orderId);
         return CommonResult.success(null);
+    }
+
+    @ApiOperation("查询会员订单")
+    @RequestMapping(value = "/getOrder",method = RequestMethod.GET)
+    @ResponseBody
+    public CommonResult<OmsOrder> getOrder(Long orderId){
+        return portalOrderService.getOrderById(orderId);
     }
 }

@@ -1,5 +1,6 @@
 package com.macro.mall.service.impl;
 
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.util.StringUtil;
 import com.macro.mall.dao.*;

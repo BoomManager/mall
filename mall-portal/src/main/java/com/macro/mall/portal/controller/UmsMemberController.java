@@ -1,15 +1,17 @@
 package com.macro.mall.portal.controller;
 
 import com.macro.mall.common.api.CommonResult;
+import com.macro.mall.model.UmsMember;
+import com.macro.mall.portal.domain.MemberDetails;
 import com.macro.mall.portal.service.UmsMemberService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.util.CollectionUtils;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 会员登录注册管理Controller
@@ -46,5 +48,31 @@ public class UmsMemberController {
                                  @RequestParam String password,
                                  @RequestParam String authCode) {
         return memberService.updatePassword(telephone,password,authCode);
+    }
+
+    @ApiOperation("获取用户信息")
+    @RequestMapping(value = "/getUserInfo", method = RequestMethod.GET)
+    @ResponseBody
+    public CommonResult<UmsMember> getUserInfo(){
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        UmsMember member = memberService.getByUsername(username);
+        if(member!=null){
+            return CommonResult.success(member);
+        }
+        throw new UsernameNotFoundException("获取用户信息失败！");
+    }
+
+    @ApiOperation("修改用户信息")
+    @RequestMapping(value = "/updateUserInfo", method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult updateMemberInfo(@RequestBody UmsMember umsMember){
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        if(!username.isEmpty()){
+            int i = memberService.updateMemberByUsername(username, umsMember);
+            if(i != 1){
+                return CommonResult.failed("修改用户信息失败！请重试！");
+            }
+        }
+        return CommonResult.success("修改用户信息成功！！！");
     }
 }

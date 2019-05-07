@@ -1,6 +1,7 @@
 package com.macro.mall.portal.service;
 
 import com.macro.mall.common.api.CommonResult;
+import com.macro.mall.model.OmsOrder;
 import com.macro.mall.portal.domain.ConfirmOrderResult;
 import com.macro.mall.portal.domain.OrderParam;
 import org.springframework.transaction.annotation.Transactional;
@@ -43,4 +44,11 @@ public interface OmsPortalOrderService {
      * 发送延迟消息取消订单
      */
     void sendDelayMessageCancelOrder(Long orderId);
+
+    /***
+     * 根据订单Id获取订单信息
+     * @param orderId
+     * @return
+     */
+    CommonResult<OmsOrder> getOrderById(Long orderId);
 }

@@ -45,4 +45,12 @@ public interface UmsMemberService {
      * 根据会员id修改会员积分
      */
     void updateIntegration(Long id,Integer integration);
+
+
+    /**
+     * 修改会员信息
+     * @param username
+     * @return
+     */
+    int updateMemberByUsername(String username, UmsMember umsMember);
 }
