@@ -2915,6 +2915,146 @@ public class OmsOrderExample {
             addCriterion("modify_time not between", value1, value2, "modifyTime");
             return (Criteria) this;
         }
+
+        public Criteria andPaymentStatusIsNull() {
+            addCriterion("payment_status is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPaymentStatusIsNotNull() {
+            addCriterion("payment_status is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPaymentStatusEqualTo(String value) {
+            addCriterion("payment_status =", value, "paymentStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPaymentStatusNotEqualTo(String value) {
+            addCriterion("payment_status <>", value, "paymentStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPaymentStatusGreaterThan(String value) {
+            addCriterion("payment_status >", value, "paymentStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPaymentStatusGreaterThanOrEqualTo(String value) {
+            addCriterion("payment_status >=", value, "paymentStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPaymentStatusLessThan(String value) {
+            addCriterion("payment_status <", value, "paymentStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPaymentStatusLessThanOrEqualTo(String value) {
+            addCriterion("payment_status <=", value, "paymentStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPaymentStatusLike(String value) {
+            addCriterion("payment_status like", value, "paymentStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPaymentStatusNotLike(String value) {
+            addCriterion("payment_status not like", value, "paymentStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPaymentStatusIn(List<String> values) {
+            addCriterion("payment_status in", values, "paymentStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPaymentStatusNotIn(List<String> values) {
+            addCriterion("payment_status not in", values, "paymentStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPaymentStatusBetween(String value1, String value2) {
+            addCriterion("payment_status between", value1, value2, "paymentStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPaymentStatusNotBetween(String value1, String value2) {
+            addCriterion("payment_status not between", value1, value2, "paymentStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andAlipayTradeNoIsNull() {
+            addCriterion("alipay_trade_no is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAlipayTradeNoIsNotNull() {
+            addCriterion("alipay_trade_no is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAlipayTradeNoEqualTo(String value) {
+            addCriterion("alipay_trade_no =", value, "alipayTradeNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andAlipayTradeNoNotEqualTo(String value) {
+            addCriterion("alipay_trade_no <>", value, "alipayTradeNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andAlipayTradeNoGreaterThan(String value) {
+            addCriterion("alipay_trade_no >", value, "alipayTradeNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andAlipayTradeNoGreaterThanOrEqualTo(String value) {
+            addCriterion("alipay_trade_no >=", value, "alipayTradeNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andAlipayTradeNoLessThan(String value) {
+            addCriterion("alipay_trade_no <", value, "alipayTradeNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andAlipayTradeNoLessThanOrEqualTo(String value) {
+            addCriterion("alipay_trade_no <=", value, "alipayTradeNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andAlipayTradeNoLike(String value) {
+            addCriterion("alipay_trade_no like", value, "alipayTradeNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andAlipayTradeNoNotLike(String value) {
+            addCriterion("alipay_trade_no not like", value, "alipayTradeNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andAlipayTradeNoIn(List<String> values) {
+            addCriterion("alipay_trade_no in", values, "alipayTradeNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andAlipayTradeNoNotIn(List<String> values) {
+            addCriterion("alipay_trade_no not in", values, "alipayTradeNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andAlipayTradeNoBetween(String value1, String value2) {
+            addCriterion("alipay_trade_no between", value1, value2, "alipayTradeNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andAlipayTradeNoNotBetween(String value1, String value2) {
+            addCriterion("alipay_trade_no not between", value1, value2, "alipayTradeNo");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

@@ -315,6 +315,20 @@ public class OmsPortalOrderServiceImpl implements OmsPortalOrderService {
         return CommonResult.success(omsOrder);
     }
 
+    @Override
+    public OmsOrderItem getOrderByOrderSn(String orderSn) {
+        OmsOrderItemExample omsOrderItemExample = new OmsOrderItemExample();
+        OmsOrderItemExample.Criteria criteria = omsOrderItemExample.createCriteria();
+        criteria.andOrderSnEqualTo(orderSn);
+        List<OmsOrderItem> omsOrderItems = orderItemMapper.selectByExample(omsOrderItemExample);
+        if(omsOrderItems.isEmpty()){
+            throw new RuntimeException("根据订单编号："+orderSn+"没有找到这个订单");
+        }else {
+            OmsOrderItem omsOrderItem = omsOrderItems.get(0);
+            return omsOrderItem;
+        }
+    }
+
     /**
      * 生成18位订单编号:8位日期+2位平台号码+2位支付方式+6位以上自增id
      */

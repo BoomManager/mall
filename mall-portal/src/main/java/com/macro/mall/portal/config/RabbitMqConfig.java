@@ -12,6 +12,98 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitMqConfig {
 
+
+    /**
+     * 支付队列
+     * @return
+     */
+    @Bean
+    public Queue payQueue() {
+        return new Queue(QueueEnum.QUEUE_PAY_CANCEL.getName());
+    }
+
+    /**
+     * 绑定支付交互机
+     * @return
+     */
+    @Bean
+    DirectExchange payDirect() {
+        return (DirectExchange) ExchangeBuilder
+                .directExchange(QueueEnum.QUEUE_PAY_CANCEL.getExchange())
+                .durable(true)
+                .build();
+    }
+
+    /**
+     * 将支付队列绑定到支付交互机
+     * @param payDirect
+     * @param payQueue
+     * @return
+     */
+    @Bean
+    Binding payBinding(DirectExchange payDirect,Queue payQueue){
+        return BindingBuilder
+                .bind(payQueue)
+                .to(payDirect)
+                .with(QueueEnum.QUEUE_PAY_CANCEL.getRouteKey());
+    }
+
+    @Bean
+    public Queue paymentSuccessQueue() {
+        return new Queue(QueueEnum.QUEUE_PAYMENT_SUCCESS_CANCEL.getName());
+    }
+
+    @Bean
+    DirectExchange paymentSuccessDirect() {
+        return (DirectExchange) ExchangeBuilder
+                .directExchange(QueueEnum.QUEUE_PAYMENT_SUCCESS_CANCEL.getExchange())
+                .durable(true)
+                .build();
+    }
+
+    @Bean
+    Binding paymentSuccessBinding(DirectExchange paymentSuccessDirect,Queue paymentSuccessQueue){
+        return BindingBuilder
+                .bind(paymentSuccessQueue)
+                .to(paymentSuccessDirect)
+                .with(QueueEnum.QUEUE_PAYMENT_SUCCESS_CANCEL.getRouteKey());
+    }
+
+    /**
+     * 库存队列
+     * @return
+     */
+    @Bean
+    public Queue reserveQueue() {
+        return new Queue(QueueEnum.QUEUE_STOCK_QUEUE.getName());
+    }
+
+    /**
+     * 绑定库存交互机
+     * @return
+     */
+    @Bean
+    DirectExchange reserveDirect() {
+        return (DirectExchange) ExchangeBuilder
+                .directExchange(QueueEnum.QUEUE_STOCK_QUEUE.getExchange())
+                .durable(true)
+                .build();
+    }
+
+    /**
+     * 将库存队列绑定到库存交换机
+     * @param reserveDirect
+     * @param reserveQueue
+     * @return
+     */
+    @Bean
+    Binding reserveBinding(DirectExchange reserveDirect,Queue reserveQueue){
+        return BindingBuilder
+                .bind(reserveQueue)
+                .to(reserveDirect)
+                .with(QueueEnum.QUEUE_STOCK_QUEUE.getRouteKey());
+    }
+
     /**
      * 订单消息实际消费队列所绑定的交换机
      */
@@ -53,6 +145,7 @@ public class RabbitMqConfig {
                 .withArgument("x-dead-letter-routing-key", QueueEnum.QUEUE_ORDER_CANCEL.getRouteKey())//到期后转发的路由键
                 .build();
     }
+
 
     /**
      * 将订单队列绑定到交换机

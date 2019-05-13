@@ -55,4 +55,18 @@ public interface OmsOrderService {
      */
     @Transactional
     int updateNote(Long id, String note, Integer status);
+
+    /**
+     * 更新订单
+     * @param outTradeNo
+     * @param paymentStatus
+     * @param trackingNo
+     */
+    void updateOrder(String outTradeNo, String paymentStatus, String trackingNo);
+
+    /**
+     * 发送订单结果
+     * @param outTradeNo
+     */
+    void sendOrderResult(String outTradeNo);
 }
