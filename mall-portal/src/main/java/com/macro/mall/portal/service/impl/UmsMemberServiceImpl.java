@@ -171,8 +171,16 @@ public class UmsMemberServiceImpl implements UmsMemberService {
         memberMapper.updateByPrimaryKeySelective(record);
     }
 
+    @Override
+    public int updateMemberByUsername(String username, UmsMember umsMember) {
+        UmsMemberExample umsMemberExample = new UmsMemberExample();
+        UmsMemberExample.Criteria criteria = umsMemberExample.createCriteria();
+        criteria.andUsernameEqualTo(username);
+        return memberMapper.updateByExample(umsMember, umsMemberExample);
+    }
+
     //对输入的验证码进行校验
-    public boolean verifyAuthCode(String authCode, String telephone){
+    private boolean verifyAuthCode(String authCode, String telephone){
         if(StringUtils.isEmpty(authCode)){
             return false;
         }

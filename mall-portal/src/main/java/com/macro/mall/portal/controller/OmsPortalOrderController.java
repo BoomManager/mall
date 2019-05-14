@@ -23,6 +23,7 @@ import java.util.List;
 @Api(tags = "OmsPortalOrderController",description = "订单管理")
 @RequestMapping("/order")
 public class OmsPortalOrderController {
+
     @Autowired
     private OmsPortalOrderService portalOrderService;
     @Autowired
@@ -61,6 +62,13 @@ public class OmsPortalOrderController {
     public CommonResult cancelOrder(Long orderId){
         portalOrderService.sendDelayMessageCancelOrder(orderId);
         return CommonResult.success(null);
+    }
+
+    @ApiOperation("查询会员订单")
+    @RequestMapping(value = "/getOrder",method = RequestMethod.GET)
+    @ResponseBody
+    public CommonResult<OmsOrder> getOrder(Long orderId){
+        return portalOrderService.getOrderById(orderId);
     }
 
     @ApiOperation("获取当前用户订单列表")

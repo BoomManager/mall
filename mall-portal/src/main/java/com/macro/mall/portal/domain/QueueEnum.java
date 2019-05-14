@@ -15,7 +15,27 @@ public enum QueueEnum {
     /**
      * 消息通知ttl队列
      */
-    QUEUE_TTL_ORDER_CANCEL("mall.order.direct.ttl", "mall.order.cancel.ttl", "mall.order.cancel.ttl");
+    QUEUE_TTL_ORDER_CANCEL("mall.order.direct.ttl", "mall.order.cancel.ttl", "mall.order.cancel.ttl"),
+
+    /**
+     * 支付通知队列
+     */
+    QUEUE_PAY_CANCEL("mall.pay.direct","mall.pay.cancel","mall.pay.cancel"),
+
+    /**
+     * 支付通知ttl队列
+     */
+    QUEUE_TTL_PAY_CANCEL("mall.pay.direct.ttl","mall.pay.cancel.ttl","mall.pay.cancel.ttl"),
+
+    /**
+     * 支付成功通知队列
+     */
+    QUEUE_PAYMENT_SUCCESS_CANCEL("mall.paysuccess.direct","mall.paysuccess.cancel","mall.paysuccess.cancel"),
+
+    /**
+     * 库存通知队列
+     */
+    QUEUE_STOCK_QUEUE("mall.stock.direct","mall.stock.cancel","mall.stock.cancel");
 
     /**
      * 交换名称
@@ -35,4 +55,15 @@ public enum QueueEnum {
         this.name = name;
         this.routeKey = routeKey;
     }
-}
+
+    public String getExchange() {
+        return exchange;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getRouteKey() {
+        return routeKey;
+    }}

@@ -63,6 +63,8 @@ public class PmsProductServiceImpl implements PmsProductService {
     private PmsProductDao productDao;
     @Autowired
     private PmsProductVertifyRecordDao productVertifyRecordDao;
+    @Autowired
+    private PmsProductVertifyRecordMapper pmsProductVertifyRecordMapper;
 
     @Override
     public int create(PmsProductParam productParam) {
@@ -258,6 +260,21 @@ public class PmsProductServiceImpl implements PmsProductService {
             productExample.or().andDeleteStatusEqualTo(0).andProductSnLike("%" + keyword + "%");
         }
         return productMapper.selectByExample(productExample);
+    }
+
+    /**
+     * 根据商品id查询商品审核信息
+     * @param id
+     * @return
+     */
+    @Override
+    public PmsProductVertifyRecord getVertifyInfo(Long id) {
+        PmsProductVertifyRecordExample pmsProductVertifyRecordExample = new PmsProductVertifyRecordExample();
+        PmsProductVertifyRecordExample.Criteria criteria = pmsProductVertifyRecordExample.createCriteria();
+        criteria.andProductIdEqualTo(id);
+        List<PmsProductVertifyRecord> pmsProductVertifyRecords = pmsProductVertifyRecordMapper.selectByExample(pmsProductVertifyRecordExample);
+        PmsProductVertifyRecord pmsProductVertifyRecord = pmsProductVertifyRecords.get(0);
+        return pmsProductVertifyRecord;
     }
 
     /**

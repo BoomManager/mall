@@ -104,11 +104,13 @@ public class EsProductServiceImpl implements EsProductService {
     @Override
     public Page<EsProduct> search(String keyword, Long brandId, Long productCategoryId, Integer pageNum, Integer pageSize,Integer sort) {
         Pageable pageable = PageRequest.of(pageNum, pageSize);
+        //将连接条件和聚合函数等组合
         NativeSearchQueryBuilder nativeSearchQueryBuilder = new NativeSearchQueryBuilder();
         //分页
         nativeSearchQueryBuilder.withPageable(pageable);
         //过滤
         if (brandId != null || productCategoryId != null) {
+            //拼装连接(查询)条件
             BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
             if (brandId != null) {
                 boolQueryBuilder.must(QueryBuilders.termQuery("brandId", brandId));
@@ -123,6 +125,7 @@ public class EsProductServiceImpl implements EsProductService {
             nativeSearchQueryBuilder.withQuery(QueryBuilders.matchAllQuery());
         } else {
             List<FunctionScoreQueryBuilder.FilterFunctionBuilder> filterFunctionBuilders = new ArrayList<>();
+            //QueryBuilders:简单的静态工厂”导入静态”使用。主要作用是查询条件(关系),如区间\精确\多值等条件
             filterFunctionBuilders.add(new FunctionScoreQueryBuilder.FilterFunctionBuilder(QueryBuilders.matchQuery("name", keyword),
                     ScoreFunctionBuilders.weightFactorFunction(10)));
             filterFunctionBuilders.add(new FunctionScoreQueryBuilder.FilterFunctionBuilder(QueryBuilders.matchQuery("subTitle", keyword),

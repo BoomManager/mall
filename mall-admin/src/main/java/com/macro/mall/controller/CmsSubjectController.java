@@ -23,6 +23,7 @@ import java.util.List;
 @Api(tags = "CmsSubjectController", description = "商品专题管理")
 @RequestMapping("/subject")
 public class CmsSubjectController {
+
     @Autowired
     private CmsSubjectService subjectService;
 

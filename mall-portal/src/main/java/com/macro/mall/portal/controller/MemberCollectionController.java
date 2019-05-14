@@ -53,4 +53,5 @@ public class MemberCollectionController {
         List<MemberProductCollection> memberProductCollectionList = memberCollectionService.listProduct(memberId);
         return CommonResult.success(memberProductCollectionList);
     }
+
 }

@@ -37,8 +37,6 @@ public class UmsAdminController {
     @Value("${jwt.tokenHead}")
     private String tokenHead;
 
-
-
     @ApiOperation(value = "用户注册")
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     @ResponseBody

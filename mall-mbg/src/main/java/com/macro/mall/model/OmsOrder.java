@@ -136,6 +136,12 @@ public class OmsOrder implements Serializable {
     @ApiModelProperty(value = "修改时间")
     private Date modifyTime;
 
+    @ApiModelProperty(value = "订单支付状态对接阿里支付")
+    private String paymentStatus;
+
+    @ApiModelProperty(value = "订单交易阿里交易码")
+    private String alipayTradeNo;
+
     private static final long serialVersionUID = 1L;
 
     public Long getId() {
@@ -490,6 +496,22 @@ public class OmsOrder implements Serializable {
         this.modifyTime = modifyTime;
     }
 
+    public String getPaymentStatus() {
+        return paymentStatus;
+    }
+
+    public void setPaymentStatus(String paymentStatus) {
+        this.paymentStatus = paymentStatus;
+    }
+
+    public String getAlipayTradeNo() {
+        return alipayTradeNo;
+    }
+
+    public void setAlipayTradeNo(String alipayTradeNo) {
+        this.alipayTradeNo = alipayTradeNo;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -540,6 +562,8 @@ public class OmsOrder implements Serializable {
         sb.append(", receiveTime=").append(receiveTime);
         sb.append(", commentTime=").append(commentTime);
         sb.append(", modifyTime=").append(modifyTime);
+        sb.append(", paymentStatus=").append(paymentStatus);
+        sb.append(", alipayTradeNo=").append(alipayTradeNo);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

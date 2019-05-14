@@ -1,9 +1,11 @@
 package com.macro.mall.service;
 
+import com.github.pagehelper.Page;
 import com.macro.mall.dto.PmsProductParam;
 import com.macro.mall.dto.PmsProductQueryParam;
 import com.macro.mall.dto.PmsProductResult;
 import com.macro.mall.model.PmsProduct;
+import com.macro.mall.model.PmsProductVertifyRecord;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -70,4 +72,13 @@ public interface PmsProductService {
      * 根据商品名称或者货号模糊查询
      */
     List<PmsProduct> list(String keyword);
+
+    /**
+     *
+     * 根据商品ID查询审核信息
+     * @param id
+     * @return
+     */
+    PmsProductVertifyRecord getVertifyInfo(Long id);
+
 }

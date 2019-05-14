@@ -47,12 +47,13 @@ public interface UmsMemberService {
     void updateIntegration(Long id,Integer integration);
 
     /**
-     * 验证验证码
-     * @param authCode
-     * @param telephone
+     * 修改会员信息
+     * @param username
      * @return
      */
-    boolean verifyAuthCode(String authCode, String telephone);
+    int updateMemberByUsername(String username, UmsMember umsMember);
+
+
 
     /**
      * 会员登陆

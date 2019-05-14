@@ -150,4 +150,45 @@ public class OmsOrderServiceImpl implements OmsOrderService {
         orderOperateHistoryMapper.insert(history);
         return count;
     }
+
+    /**
+     *  更新订单状态、支付方式...
+     * @param outTradeNo
+     * @param paymentStatus
+     * @param trackingNo
+     */
+    @Override
+    public void updateOrder(String outTradeNo, String paymentStatus, String trackingNo) {
+        OmsOrderExample omsOrderExample = new OmsOrderExample();
+        OmsOrderExample.Criteria criteria = omsOrderExample.createCriteria();
+        criteria.andOrderSnEqualTo(outTradeNo);
+        List<OmsOrder> omsOrders = orderMapper.selectByExample(omsOrderExample);
+        OmsOrder omsOrder = omsOrders.get(0);
+        omsOrder.setStatus(1);//修改支付状态为待发货
+        omsOrder.setPayType(1);//修改支付类型为支付宝
+        omsOrder.setSourceType(0);//修改来源为pc端
+        orderMapper.updateByPrimaryKey(omsOrder);
+    }
+
+    /**
+     * 发送一个订单成功的消息队列，由库存系统消费(或者调用库存接口)
+     * @param outTradeNo
+     */
+    @Override
+    public void sendOrderResult(String outTradeNo) {
+        OmsOrderExample omsOrderExample = new OmsOrderExample();
+        OmsOrderExample.Criteria criteria = omsOrderExample.createCriteria();
+        criteria.andOrderSnEqualTo(outTradeNo);
+        List<OmsOrder> omsOrders = orderMapper.selectByExample(omsOrderExample);
+        OmsOrder omsOrder = omsOrders.get(0);
+        //给延迟队列发送消息
+/*        amqpTemplate.convertAndSend(QueueEnum.PAYMENT_SUCCESS_QUEUE.getExchange(), QueueEnum.PAYMENT_SUCCESS_QUEUE.getRouteKey(), omsOrder, new MessagePostProcessor() {
+            @Override
+            public Message postProcessMessage(Message message) throws AmqpException {
+                //给消息设置延迟毫秒值
+                message.getMessageProperties().setExpiration(String.valueOf(0));
+                return message;
+            }
+        });*/
+    }
 }

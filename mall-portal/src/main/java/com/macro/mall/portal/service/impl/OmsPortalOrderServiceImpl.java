@@ -27,6 +27,8 @@ import java.util.*;
 public class OmsPortalOrderServiceImpl implements OmsPortalOrderService {
     @Autowired
     private UmsMemberService memberService;
+
+
     @Autowired
     private OmsCartItemService cartItemService;
     @Autowired
@@ -310,7 +312,25 @@ public class OmsPortalOrderServiceImpl implements OmsPortalOrderService {
         //发送延迟消息
         cancelOrderSender.sendMessage(orderId, delayTimes);
     }
+    @Override
+    public CommonResult<OmsOrder> getOrderById(Long orderId) {
+        OmsOrder omsOrder = orderMapper.selectByPrimaryKey(orderId);
+        return CommonResult.success(omsOrder);
+    }
 
+    @Override
+    public OmsOrderItem getOrderByOrderSn(String orderSn) {
+        OmsOrderItemExample omsOrderItemExample = new OmsOrderItemExample();
+        OmsOrderItemExample.Criteria criteria = omsOrderItemExample.createCriteria();
+        criteria.andOrderSnEqualTo(orderSn);
+        List<OmsOrderItem> omsOrderItems = orderItemMapper.selectByExample(omsOrderItemExample);
+        if(omsOrderItems.isEmpty()){
+            throw new RuntimeException("根据订单编号："+orderSn+"没有找到这个订单");
+        }else {
+            OmsOrderItem omsOrderItem = omsOrderItems.get(0);
+            return omsOrderItem;
+        }
+    }
     @Override
     public List<OmsOrder> getOrderList(String username) {
         UmsMemberExample memberExample= new UmsMemberExample();

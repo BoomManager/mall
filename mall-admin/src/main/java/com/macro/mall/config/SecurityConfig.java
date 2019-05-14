@@ -46,6 +46,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private RestAuthenticationEntryPoint restAuthenticationEntryPoint;
 
+    /**
+     *  访问拦截请求
+     * @param httpSecurity
+     * @throws Exception
+     */
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf()// 由于使用的是JWT，我们这里不需要csrf
@@ -107,6 +112,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         };
     }
 
+    /**
+     * 身份认证过滤
+     * @return
+     */
     @Bean
     public JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter(){
         return new JwtAuthenticationTokenFilter();

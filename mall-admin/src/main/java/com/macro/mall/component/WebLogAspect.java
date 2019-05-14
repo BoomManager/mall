@@ -41,19 +41,38 @@ public class WebLogAspect {
     private static final Logger LOGGER = LoggerFactory.getLogger(WebLogAspect.class);
     private ThreadLocal<Long> startTime = new ThreadLocal<>();
 
+    /**
+     * 切入点
+     */
     @Pointcut("execution(public * com.macro.mall.controller.*.*(..))")
     public void webLog() {
     }
 
+    /**
+     * 切点之前
+     * @param joinPoint
+     * @throws Throwable
+     */
     @Before("webLog()")
     public void doBefore(JoinPoint joinPoint) throws Throwable {
         startTime.set(System.currentTimeMillis());
     }
 
+    /**
+     * 切入点之后
+     * @param ret
+     * @throws Throwable
+     */
     @AfterReturning(value = "webLog()", returning = "ret")
     public void doAfterReturning(Object ret) throws Throwable {
     }
 
+    /**
+     * 拦截方法的前后执行一段逻辑
+     * @param joinPoint
+     * @return
+     * @throws Throwable
+     */
     @Around("webLog()")
     public Object doAround(ProceedingJoinPoint joinPoint) throws Throwable {
         //获取当前请求对象

@@ -6,6 +6,7 @@ import com.macro.mall.dto.PmsProductParam;
 import com.macro.mall.dto.PmsProductQueryParam;
 import com.macro.mall.dto.PmsProductResult;
 import com.macro.mall.model.PmsProduct;
+import com.macro.mall.model.PmsProductVertifyRecord;
 import com.macro.mall.service.PmsProductService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -48,6 +49,14 @@ public class PmsProductController {
     public CommonResult<PmsProductResult> getUpdateInfo(@PathVariable Long id) {
         PmsProductResult productResult = productService.getUpdateInfo(id);
         return CommonResult.success(productResult);
+    }
+
+    @ApiOperation("根据商品id获取审核信息")
+    @RequestMapping(value = "/vertify/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public CommonResult<PmsProductVertifyRecord> getVertifyInfo(@PathVariable Long id){
+        PmsProductVertifyRecord pmsProductVertifyRecordResult = productService.getVertifyInfo(id);
+        return CommonResult.success(pmsProductVertifyRecordResult);
     }
 
     @ApiOperation("更新商品")

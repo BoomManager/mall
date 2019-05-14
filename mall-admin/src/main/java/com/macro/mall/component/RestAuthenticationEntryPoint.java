@@ -17,6 +17,15 @@ import java.io.IOException;
  */
 @Component
 public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint {
+
+    /**
+     * 返回认证失败的信息
+     * @param request
+     * @param response
+     * @param authException
+     * @throws IOException
+     * @throws ServletException
+     */
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
         response.setCharacterEncoding("UTF-8");

@@ -26,8 +26,6 @@ aliyun:
     dir:
       prefix: mall/images/
 
-
-
 logging:
   level:
     root: info #日志配置DEBUG,INFO,WARN,ERROR

@@ -17,6 +17,15 @@ import java.io.IOException;
  */
 @Component
 public class RestfulAccessDeniedHandler implements AccessDeniedHandler{
+
+    /***
+     * 响应访问被拒绝异常
+     * @param request
+     * @param response
+     * @param e
+     * @throws IOException
+     * @throws ServletException
+     */
     @Override
     public void handle(HttpServletRequest request,
                        HttpServletResponse response,
