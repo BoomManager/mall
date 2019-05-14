@@ -45,6 +45,7 @@ public class PayController {
     @RequestMapping(value = "/alipay/submit", method = RequestMethod.GET)
     @ResponseBody
     public String goToPay( String orderSn, BigDecimal totalAmount) {
+        //
         //根据订单编号获取订单详情信息
         OmsOrderItem omsOrderItem =omsPortalOrderService.getOrderByOrderSn(orderSn);
         //获取商品名称
