@@ -81,18 +81,7 @@ public class UmsMemberController {
         tokenMap.put("tokenHead", tokenHead);
         return CommonResult.success(tokenMap);
     }
-    @ApiOperation("验证验证码")
-    @RequestMapping(value = "/verifyAuthCode", method = RequestMethod.POST)
-    @ResponseBody
-    public CommonResult verifyAuthCode(@RequestParam String authCode,
-                              @RequestParam String telephone) {
-        boolean b = memberService.verifyAuthCode(authCode,telephone);
-        if(b){
-            return CommonResult.success(null,"验证码正确");
-        }else{
-            return CommonResult.failed("验证码错误");
-        }
-    }
+
     @ApiOperation(value = "登出功能")
     @RequestMapping(value = "/logout", method = RequestMethod.POST)
     @ResponseBody

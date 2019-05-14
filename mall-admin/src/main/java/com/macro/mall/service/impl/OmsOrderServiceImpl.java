@@ -23,14 +23,24 @@ import java.util.stream.Collectors;
  */
 @Service
 public class OmsOrderServiceImpl implements OmsOrderService {
+
     @Autowired
     private OmsOrderMapper orderMapper;
+
     @Autowired
     private OmsOrderDao orderDao;
+
     @Autowired
     private OmsOrderOperateHistoryDao orderOperateHistoryDao;
+
     @Autowired
     private OmsOrderOperateHistoryMapper orderOperateHistoryMapper;
+
+/*    @Autowired
+    private AmqpTemplate amqpTemplate;
+
+    @Autowired
+    AlipayClient alipayClient;*/
 
     @Override
     public List<OmsOrder> list(OmsOrderQueryParam queryParam, Integer pageSize, Integer pageNum) {
